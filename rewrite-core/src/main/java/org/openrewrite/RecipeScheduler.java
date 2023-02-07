@@ -176,6 +176,10 @@ public interface RecipeScheduler {
             ((WatchableExecutionContext) ctx).resetHasNewMessages();
         }
 
+        for (RecipeApplicableTest test : ctx.getMessage(RecipeApplicableTest.class.getSimpleName(), new HashSet<RecipeApplicableTest>())) {
+            recipe.addApplicableTest(test.getTest(recipe));
+        }
+
         try {
             if (!recipe.getApplicableTests().isEmpty()) {
                 boolean anySourceMatch = false;
